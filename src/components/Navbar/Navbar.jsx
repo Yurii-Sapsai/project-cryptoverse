@@ -14,7 +14,7 @@ function Navbar() {
     <div className='navbar'>
         <div className="navbar__header">
             <img src={logo} alt="logo" />
-            <h1>CryptoWorld</h1>
+            <h1>Сryptoverse</h1>
         </div>
         <ul className='navbar__list'>
 
