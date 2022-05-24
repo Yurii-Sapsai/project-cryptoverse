@@ -1,5 +1,3 @@
-import axios from "axios";
-
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
 
 const cryptoApiHeaders = {
@@ -19,7 +17,6 @@ export const cryptoApi = createApi({
             query: (count) => createRequest(`/coins?limit=${count}`)
         })
     })
-
 }) 
 
 export const { useGetCryptosQuery } = cryptoApi
