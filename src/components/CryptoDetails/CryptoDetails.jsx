@@ -3,10 +3,9 @@ import HTMLReactParser from 'html-react-parser';
 import {useParams} from 'react-router-dom'
 import millify from 'millify'
 
-import { useGetCryptoDetailsQuery } from '../../services/cryptoAPI'
+import { useGetCryptoDetailsQuery, useGetCryptoHistoryQuery } from '../../services/cryptoAPI'
 
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
-import OfflineBoltIcon from '@mui/icons-material/OfflineBolt';
 import ConfirmationNumberOutlinedIcon from '@mui/icons-material/ConfirmationNumberOutlined';
 import EmojiEventsOutlinedIcon from '@mui/icons-material/EmojiEventsOutlined';
 import ShowChartOutlinedIcon from '@mui/icons-material/ShowChartOutlined';
@@ -15,12 +14,15 @@ import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 import DoDisturbOutlinedIcon from '@mui/icons-material/DoDisturbOutlined';
 import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined';
 
+import LineChart from '../LineChart/LineChart';
+
 function CryptoDetails() {
 
     const {coinId} = useParams()
 
     const [timePeriod, setTimePeriod] = useState('7d');
     const {data, isFetching} = useGetCryptoDetailsQuery(coinId);
+    const {data: coinHistory} = useGetCryptoHistoryQuery({coinId, timePeriod});
     const cryptoDetails = data?.data?.coin;
 
     console.log(data)
@@ -31,8 +33,7 @@ function CryptoDetails() {
     const stats = [
       { title: 'Price to USD', value: `$ ${cryptoDetails?.price && millify(cryptoDetails?.price)}`, icon: <MonetizationOnIcon /> },
       { title: 'Rank', value: cryptoDetails?.rank, icon: <ConfirmationNumberOutlinedIcon /> },
-/*       { title: '24h Volume', value: `$ ${cryptoDetails?.total24hVolume && millify(cryptoDetails?.total24hVolume)}`, icon: <OfflineBoltIcon /> },
- */   { title: 'Market Cap', value: `$ ${cryptoDetails?.marketCap && millify(cryptoDetails?.marketCap)}`, icon: <MonetizationOnIcon /> },
+      { title: 'Market Cap', value: `$ ${cryptoDetails?.marketCap && millify(cryptoDetails?.marketCap)}`, icon: <MonetizationOnIcon /> },
       { title: 'All-time-high(daily avg.)', value: `$ ${cryptoDetails?.allTimeHigh?.price && millify(cryptoDetails?.allTimeHigh?.price)}`, icon: <EmojiEventsOutlinedIcon /> },
     ];
   
@@ -44,6 +45,7 @@ function CryptoDetails() {
       { title: 'Circulating Supply', value: `$ ${cryptoDetails?.supply?.circulating && millify(cryptoDetails?.supply?.circulating)}`, icon: <ErrorOutlineOutlinedIcon /> },
     ];
 
+    if(isFetching) return 'Loading ...'
 
   return (
     <div className='cryptoDetails__wrapper'>
@@ -54,16 +56,17 @@ function CryptoDetails() {
                   onChange={(e) => setTimePeriod(e.target.value)}
             >
             <option value="7d">7d</option>
-            {time.map((date) => <option key={date}>{date}</option>)}
+            {time.map((date, index) => <option key={index}>{date}</option>)}
         </select>
 
+        <LineChart coinHistory={coinHistory} currentPrice={cryptoDetails?.price} coinName={cryptoDetails?.name} />
 
         <div>
                 <h4>{cryptoDetails?.name} Value Statistics</h4>
                 <p>An overview showing the statistics of {cryptoDetails?.name}</p>
                 <ul>
-                    {stats.map(({icon, title, value}) => (
-                        <li>{icon}{title} <span>{value}</span> </li>
+                    {stats.map(({icon, title, value, index}) => (
+                        <li key={index}>{icon}{title} <span>{value}</span> </li>
                     ))}
                 </ul>
         </div>
@@ -72,8 +75,8 @@ function CryptoDetails() {
                 <h4>Other Statistics</h4>
                 <p>An overview showing the statistics of all cryptocurrencies</p>
                 <ul>
-                    {genericStats.map(({icon, title, value}) => (
-                        <li>{icon}{title} <span>{value}</span> </li>
+                    {genericStats.map(({icon, title, value, index}) => (
+                        <li key={index}>{icon}{title} <span>{value}</span> </li>
                     ))}
                 </ul>
         </div>
@@ -85,12 +88,12 @@ function CryptoDetails() {
 
         <div>
                  <h4>{cryptoDetails?.name} Links</h4>  
-                    
-                 {cryptoDetails?.links.map((link)=> (
-                     <>
+
+                 {cryptoDetails?.links.map((link, index)=> (
+                     <div key={index}>
                         <h4>{link?.name}</h4>
                         <a href={link?.url}>{link?.name}</a>
-                     </>
+                     </div>
                  ))}  
         </div>               
 
