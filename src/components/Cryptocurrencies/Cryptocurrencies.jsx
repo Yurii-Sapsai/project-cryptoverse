@@ -29,7 +29,7 @@ function Cryptocurrencies({simplified}) {
                             </div>}
       <div className='cryptocurrencies__container'>
           {cryptos?.map((currency)=>(
-              <NavLink to={`/crypto/${currency.id}`} key={currency.uuid} className='cryptocurrencies__link'>
+              <NavLink to={`/crypto/${currency.uuid}`} key={currency.uuid} className='cryptocurrencies__link'>
               <div className='cryptocurrencies__card'>
                     <div className='cryptocurrencies__card-title'>
                         <h4>{currency.rank}. {currency.name}</h4>
