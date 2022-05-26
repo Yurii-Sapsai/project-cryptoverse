@@ -20,9 +20,9 @@ function CryptoDetails() {
 
     const {coinId} = useParams()
 
-    const [timePeriod, setTimePeriod] = useState('7d');
+    const [timeperiod, setTimePeriod] = useState('7d');
     const {data, isFetching} = useGetCryptoDetailsQuery(coinId);
-    const {data: coinHistory} = useGetCryptoHistoryQuery({coinId, timePeriod});
+    const { data: coinHistory } = useGetCryptoHistoryQuery({ coinId, timeperiod });
     const cryptoDetails = data?.data?.coin;
 
     console.log(data)
@@ -46,7 +46,8 @@ function CryptoDetails() {
     ];
 
     if(isFetching) return 'Loading ...'
-
+    console.log(timeperiod)
+    console.log(coinHistory)
   return (
     <div className='cryptoDetails__wrapper'>
          <h4>{cryptoDetails?.name} ({cryptoDetails?.symbol}) Price</h4> 
@@ -59,7 +60,7 @@ function CryptoDetails() {
             {time.map((date, index) => <option key={index}>{date}</option>)}
         </select>
 
-        <LineChart coinHistory={coinHistory} currentPrice={cryptoDetails?.price} coinName={cryptoDetails?.name} />
+        <LineChart coinHistory={coinHistory} currentPrice={millify(cryptoDetails?.price)} coinName={cryptoDetails?.name} />
 
         <div>
                 <h4>{cryptoDetails?.name} Value Statistics</h4>
