@@ -16,9 +16,10 @@ function News({simplified}) {
   if(!cryptoNews?.value) return 'Loading...'
 
   return (
-   <div>
+   <div className='news__wrapper'>
       {!simplified && (
             <select
+                  className='news__select'
                   placeholder="Select a Crypto"
                   onChange={(e) => setNewsCategory(e.target.value)}
             >
@@ -28,24 +29,28 @@ function News({simplified}) {
         </select>
         )} 
          
-    <div className='news__wrapper'>
+    <div >
 
             <Grid container maxWidth="100%" spacing={3}>
 
                 {cryptoNews.value.map((news, i) =>(
-                  <Grid item xs={12} sm={12} md={6}>
+                  <Grid item xs={12} sm={12} md={6} lg={4}>
                   <a href={news.url} key={i}>
                       <div className='news__card'>
-                        <h4>{news.name}</h4>
-                        <img src={news?.image?.thumbnail?.contentUrl || demoImage } alt="news" />
-                        <p>
+                        <div className='news__card-title'>
+                            <h4>{news.name}</h4>
+                            <img src={news?.image?.thumbnail?.contentUrl || demoImage } alt="news" />
+                        </div>
+                        <p className='news__card-description'>
                             {news.description.length > 100 ? `${news.description.substring(0, 100)}...` : news.description}
                         </p>
-                        <div>
-                          <img src={news.provider[0]?.image?.thumbnail?.contentUrl || demoImage} alt="news" style={{height:'16px'}}/>
-                          <p>{news.provider[0]?.name}</p>
+                        <div className='news__card-footer'>
+                          <div>
+                              <img src={news.provider[0]?.image?.thumbnail?.contentUrl || demoImage} alt="news" style={{height:'26px'}}/>
+                              <p>{news.provider[0]?.name}</p>
+                          </div>
+                          <p>{moment(news.datePublished).startOf('ss').fromNow()}</p>
                         </div>
-                        <p>{moment(news.datePublished).startOf('ss').fromNow()}</p>
                       </div>
                   </a>
                   </Grid > 
