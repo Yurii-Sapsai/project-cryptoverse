@@ -4,6 +4,7 @@ import moment from 'moment';
 import { useGetCryptoNewsQuery } from '../../services/cryptoNewsApi'
 import { useGetCryptosQuery } from '../../services/cryptoAPI';
 import { Grid } from '@mui/material';
+import Loader from '../Loader/Loader';
 
 const demoImage = 'https://www.bing.com/th?id=OVFT.mpzuVZnv8dwIMRfQGPbOPC&pid=News'
 
@@ -13,7 +14,7 @@ function News({simplified}) {
   const {data: cryptoNews } = useGetCryptoNewsQuery({ newsCategory, count: simplified ? 6 : 12})
   const { data } = useGetCryptosQuery(100);
 
-  if(!cryptoNews?.value) return 'Loading...'
+  if(!cryptoNews?.value) return <Loader/>
 
   return (
    <div className='news__wrapper'>

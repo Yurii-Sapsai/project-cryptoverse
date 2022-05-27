@@ -18,6 +18,10 @@ import BarChartIcon from '@mui/icons-material/BarChart';
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
 import logo from './images/cryptocurrency.png'
+import FacebookIcon from '@mui/icons-material/Facebook';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import PinterestIcon from '@mui/icons-material/Pinterest';
 
 import Home from './components/Home/Home';
 import Cryptocurrencies from './components/Cryptocurrencies/Cryptocurrencies'
@@ -47,16 +51,16 @@ export default function App(props) {
         {['Home', 'Cryptocurrencies', 'Exchanges', 'News'].map((text, index) => (
           <NavLink to={text}>
             <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index === 0 ? <HomeIcon style={{color:'white'}}/> : null}
-                {index === 1 ? <BarChartIcon style={{color:'white'}}/> : null}
-                {index === 2 ? <CurrencyExchangeIcon style={{color:'white'}}/> : null}
-                {index === 3 ? <NewspaperIcon style={{color:'white'}}/> : null}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
+              <ListItemButton>
+                <ListItemIcon>
+                  {index === 0 ? <HomeIcon style={{ color: 'white' }} /> : null}
+                  {index === 1 ? <BarChartIcon style={{ color: 'white' }} /> : null}
+                  {index === 2 ? <CurrencyExchangeIcon style={{ color: 'white' }} /> : null}
+                  {index === 3 ? <NewspaperIcon style={{ color: 'white' }} /> : null}
+                </ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItemButton>
+            </ListItem>
           </NavLink>
         ))}
       </List>
@@ -68,85 +72,91 @@ export default function App(props) {
   return (
     <Router>
 
-    <Box sx={{ display: 'flex', padding:'0px', paddingTop: {xs:'55px', sm:'0px'} }}>
-      
-      <AppBar 
-        position="fixed"
-        sx={{
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-          ml: { sm: `${drawerWidth}px` }, 
-                 
-        }}
-      >
-        <Toolbar style={{backgroundColor:'#001226'}} sx={{ display: { sm: 'none' }}}>
-                  <IconButton
-                    color="inherit"
-                    aria-label="open drawer"
-                    edge="start"
-                    onClick={handleDrawerToggle}
-                    sx={{ mr: 2, display: { sm: 'none' } }}
-                  >
-                        <MenuIcon />
-                </IconButton>
-                <img src={logo} alt="logo" style={{height:'40px', marginRight:'10px'}}/>
-                <Typography variant="h6" noWrap component="div">
-                    Сryptoverse
-                </Typography>
-        </Toolbar>
-      </AppBar>
+      <Box sx={{ display: 'flex', padding: '0px', paddingTop: { xs: '55px', sm: '0px' } }}>
 
-
-      <Box component="nav" sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }} aria-label="mailbox folders">
-        <Drawer //MOBILE
-          container={container}
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, 
-          }}
+        <AppBar
+          position="fixed"
           sx={{
-            display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+            width: { sm: `calc(100% - ${drawerWidth}px)` },
+            ml: { sm: `${drawerWidth}px` },
+
           }}
         >
-          {drawer}
-        </Drawer>
-        
-        <Drawer //DESKTOP
-          variant="permanent"
-          sx={{
-            display: { xs: 'none', sm: 'block' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, backgroundColor: '#001226' },
-          }}
-          open
-        >
-          <div style={{display:'flex', justifyContent:'center', alignItems:'center', margin:'18px 0px'}}>
-              <img src={logo} alt="logo" style={{width:'40px', marginRight:'10px'}}/>
-              <Typography variant="h6" noWrap component="div" style={{color:'white'}}>
-                        Сryptoverse
+          <Toolbar style={{ backgroundColor: '#001226' }} sx={{ display: { sm: 'none' } }}>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              sx={{ mr: 2, display: { sm: 'none' } }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <img src={logo} alt="logo" style={{ height: '40px', marginRight: '10px' }} />
+            <Typography variant="h6" noWrap component="div">
+              Сryptoverse
+            </Typography>
+          </Toolbar>
+        </AppBar>
+
+
+        <Box component="nav" sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }} aria-label="mailbox folders">
+          <Drawer //MOBILE
+            container={container}
+            variant="temporary"
+            open={mobileOpen}
+            onClose={handleDrawerToggle}
+            ModalProps={{
+              keepMounted: true,
+            }}
+            sx={{
+              display: { xs: 'block', sm: 'none' },
+              '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, backgroundColor: '#001226' },
+            }}
+          >
+            {drawer}
+          </Drawer>
+
+          <Drawer //DESKTOP
+            variant="permanent"
+            sx={{
+              display: { xs: 'none', sm: 'block' },
+              '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, backgroundColor: '#001226' },
+            }}
+            open
+          >
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '18px 0px' }}>
+              <img src={logo} alt="logo" style={{ width: '40px', marginRight: '10px' }} />
+              <Typography variant="h6" noWrap component="div" style={{ color: 'white' }}>
+                Сryptoverse
               </Typography>
-              </div>
-          {drawer}
-        </Drawer>
+            </div>
+            {drawer}
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'white', marginTop: '50px', gap: '10px' }}>
+              <FacebookIcon />
+              <InstagramIcon />
+              <TwitterIcon />
+              <PinterestIcon />
+            </div>
+          </Drawer>
+
+        </Box>
+
+
+        <Box component="main" sx={{ flexGrow: 1, width: { sm: `calc(100% - ${drawerWidth}px)` } }} >
+          <main>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/cryptocurrencies" element={<Cryptocurrencies />} />
+              <Route path="/exchanges" element={<Exchanges />} />
+              <Route path="/news" element={<News />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/crypto/:coinId" element={<CryptoDetails />} />
+            </Routes>
+          </main>
+        </Box>
 
       </Box>
-
-      
-            <Box component="main" sx={{ flexGrow: 1, width: {sm: `calc(100% - ${drawerWidth}px)`} }} > 
-                  <main>
-                        <Routes>
-                              <Route path="/" element={<Home/>} />
-                              <Route path="/cryptocurrencies" element={<Cryptocurrencies/>} />
-                              <Route path="/exchanges" element={<Exchanges/>} />
-                              <Route path="/news" element={<News/>} />
-                              <Route path="/home" element={<Home/>} />
-                              <Route path="/crypto/:coinId" element={<CryptoDetails/>} />
-                        </Routes>
-                  </main>
-            </Box>
-
-    </Box>
     </Router>
   );
 }
