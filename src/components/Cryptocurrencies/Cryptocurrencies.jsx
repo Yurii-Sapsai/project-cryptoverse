@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import './Cryptocurrencies.sass'
+
 import millify from 'millify'
 import { NavLink } from 'react-router-dom'
-import { Grid } from '@mui/material';
 import { useGetCryptosQuery } from '../../services/cryptoAPI'
 
 import Loader from '../Loader/Loader';
+
+import { Grid, Box, Typography, TextField } from '@mui/material';
 
 
 function Cryptocurrencies({ simplified }) {
@@ -25,29 +26,43 @@ function Cryptocurrencies({ simplified }) {
   if (isFetching) return <Loader />
 
   return (
-    <div className='cryptocurrencies__wrapper'>
+    <Box sx={{ padding: "25px", backgroundColor: "#f1f2f5", display: "flex", flexDirection: "column", alignItems: "center", justifyContent:"start"}}>
 
-      {simplified ? null : <div className='cryptocurrencies__search'>
-        <input type="text" placeholder='Search Cryptocurrency' onChange={(e) => setSearchTerm(e.target.value)} />
-      </div>}
+      {simplified ? null : <TextField
+        label="Search Cryptocurrency"
+        variant="standard"
+        sx={{ marginBottom: "25px" }}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />}
 
       <Grid container maxWidth="100%" spacing={2}>
 
         {cryptos?.map((currency) => (
 
           <Grid item xs={6} sm={6} md={4} lg={3}>
-            <NavLink to={`/crypto/${currency.uuid}`} key={currency.uuid} className='cryptocurrencies__link'>
+            <NavLink to={`/crypto/${currency.uuid}`} key={currency.uuid} style={{ textDecoration: "none", color: "black", cursor: "pointer" }}>
 
-              <div className='cryptocurrencies__card' >
-                <div className='cryptocurrencies__card-title'>
-                  <h4>{currency.rank}. {currency.name}</h4>
-                  <img src={currency.iconUrl} alt="" style={{ height: '25px' }} />
-                </div>
+              <Box sx={{
+                backgroundColor: "white",
+                borderRadius: "8px",
+                padding: "10px",
+                fontSize: "14px",
+                '&:hover': {
+                  boxShadow: "5px 5px 15px 5px rgba(0,0,0,0.3)"
+                },
+                '& p': { marginTop: "5px" }
+              }} >
 
+                <Box sx={{ display: "flex", justifyContent: "space-between", marginBottom: "25px" }}>
+                  <Typography component={"h4"}>
+                    {currency.rank}. {currency.name}
+                  </Typography>
+                  <img src={currency.iconUrl} alt="icon" style={{ height: '25px' }} />
+                </Box>
                 <p>Price: {millify(currency.price)}</p>
                 <p>Market Cap: {millify(currency.marketCap)}</p>
                 <p>Price: {millify(currency.change)}%</p>
-              </div>
+              </Box>
 
             </NavLink>
           </Grid >
@@ -56,7 +71,7 @@ function Cryptocurrencies({ simplified }) {
 
       </Grid>
 
-    </div>
+    </Box>
   )
 }
 

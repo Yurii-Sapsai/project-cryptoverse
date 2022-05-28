@@ -8,7 +8,8 @@ body{
     -ms-overflow-style: none; /* IE/Edge */
     scrollbar-width: none; /* Firefox */
 
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: Roboto;
+    background-color: #f1f2f5
 }
 ::-webkit-scrollbar{ 
     display: none; /* Chrome/Safari/Opera */

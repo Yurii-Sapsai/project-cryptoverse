@@ -1,5 +1,4 @@
 import * as React from 'react';
-import './App.sass'
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -17,11 +16,11 @@ import HomeIcon from '@mui/icons-material/Home';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
-import logo from './images/cryptocurrency.png'
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import PinterestIcon from '@mui/icons-material/Pinterest';
+import logo from './images/cryptocurrency.png'
 
 import Home from './components/Home/Home';
 import Cryptocurrencies from './components/Cryptocurrencies/Cryptocurrencies'
@@ -34,7 +33,7 @@ import { Routes } from 'react-router-dom'
 import { NavLink } from 'react-router-dom';
 
 
-const drawerWidth = 280;
+const drawerWidth = 240;
 
 export default function App(props) {
 
@@ -49,7 +48,7 @@ export default function App(props) {
     <div>
       <List>
         {['Home', 'Cryptocurrencies', 'Exchanges', 'News'].map((text, index) => (
-          <NavLink to={text}>
+          <NavLink to={text} style={{textDecoration:"none", color: "white"}}>
             <ListItem key={text} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
@@ -72,7 +71,7 @@ export default function App(props) {
   return (
     <Router>
 
-      <Box sx={{ display: 'flex', padding: '0px', paddingTop: { xs: '55px', sm: '0px' } }}>
+      <Box sx={{ display: 'flex', padding: '0px', paddingTop: { xs: '55px', sm: '0px' } }} >
 
         <AppBar
           position="fixed"
@@ -101,7 +100,7 @@ export default function App(props) {
 
 
         <Box component="nav" sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }} aria-label="mailbox folders">
-          <Drawer //MOBILE
+          <Drawer 
             container={container}
             variant="temporary"
             open={mobileOpen}
@@ -117,7 +116,7 @@ export default function App(props) {
             {drawer}
           </Drawer>
 
-          <Drawer //DESKTOP
+          <Drawer 
             variant="permanent"
             sx={{
               display: { xs: 'none', sm: 'block' },
@@ -143,7 +142,7 @@ export default function App(props) {
         </Box>
 
 
-        <Box component="main" sx={{ flexGrow: 1, width: { sm: `calc(100% - ${drawerWidth}px)` } }} >
+        <Box component="main" sx={{ flexGrow: 1, width: { sm: `calc(100% - ${drawerWidth}px)` }, height:"100%", backgroundColor:"#f1f2f5" }} >
           <main>
             <Routes>
               <Route path="/" element={<Home />} />

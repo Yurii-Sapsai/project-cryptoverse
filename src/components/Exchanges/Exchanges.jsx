@@ -1,11 +1,8 @@
 import React from 'react'
-import './Exchanges.sass'
 
-import { useGetExchangesQuery, useGetExchangesIconsQuery } from '../../services/cryptoExchanges'
+import { useGetExchangesQuery } from '../../services/cryptoExchanges'
 
-
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
+import {Box, Grid, Typography} from '@mui/material'
 
 import Loader from '../Loader/Loader';
 
@@ -18,10 +15,17 @@ function Exchanges() {
   if (isFetching) return <Loader />
 
   return (
-    <Container maxWidth={'100%'} className={'exchanges__wrapper'}>
-      <h3>Popular cryptocurrency exchanges</h3>
+    <Box sx={{padding:"25px"}}>
+      <Typography variant='' component={"h2"} sx={{fontWeight:"300", textAlign:"center", marginBottom:"20px"}}>Popular cryptocurrency exchanges</Typography>
       {exchanges?.map((exchange) => (
-        <Grid container className={'exchanges__container'} maxWidth="xl">
+        <Grid container sx={{backgroundColor:"white", 
+                             borderRadius: "8px", 
+                             padding:"10px", 
+                             marginBottom:"15px",
+                             '&:hover': {
+                              boxShadow: "5px 5px 15px 5px rgba(0,0,0,0.3)"
+                            },
+                            '& a': { textDecoration:"none", color:"black" }}}>
           <Grid item md={6} xs={12}>
             {exchange?.name}
           </Grid>
@@ -30,7 +34,7 @@ function Exchanges() {
           </Grid>
         </Grid>
       ))}
-    </Container>
+    </Box>
   )
 }
 

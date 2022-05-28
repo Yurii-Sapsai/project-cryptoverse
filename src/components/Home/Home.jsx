@@ -9,6 +9,8 @@ import Cryptocurrencies from '../Cryptocurrencies/Cryptocurrencies'
 import News from '../News/News'
 import Loader from '../Loader/Loader'
 
+import Button from '@mui/material/Button';
+
 function Home() {
 
     const { data, isFetching } = useGetCryptosQuery(10)
@@ -47,13 +49,13 @@ function Home() {
 
             <div className='home__top10-title'>
                 <h2>Top 10 Cryptocurrencies</h2>
-                <NavLink to='/cryptocurrencies'><h3>Show more</h3></NavLink>
+                <NavLink to='/cryptocurrencies' style={{textDecoration:"none"}}><Button variant="contained" sx={{fontFamily:"Arial"}} size={"small"}>Show more</Button></NavLink>
             </div>
             <Cryptocurrencies simplified />
 
             <div className='home__latestNews-title'>
                 <h2>Latest Crypto News</h2>
-                <NavLink to='/news'><h3>Show more</h3></NavLink>
+                <NavLink to='/news' style={{textDecoration:"none"}} ><Button variant="contained" sx={{fontFamily:"Arial"}} size={"small"}>Show more</Button></NavLink>
             </div>
             <News simplified />
 
