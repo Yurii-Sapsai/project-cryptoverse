@@ -1,11 +1,10 @@
-import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const cryptoExchangesHeaders = {'X-CoinAPI-Key': 'CCF7CF58-A173-4CCE-874D-16A165FF2FF7'}
+const cryptoExchangesHeaders = { 'X-CoinAPI-Key': 'CCF7CF58-A173-4CCE-874D-16A165FF2FF7' };
 
+const baseUrl = 'https://rest.coinapi.io/';
 
-const baseUrl = 'https://rest.coinapi.io/' ;
-
-const createRequest = (url) => ({ url, headers: cryptoExchangesHeaders })
+const createRequest = (url) => ({ url, headers: cryptoExchangesHeaders });
 
 export const cryptoExchanges = createApi({
     reducerPath: 'cryptoExchanges',
@@ -17,8 +16,7 @@ export const cryptoExchanges = createApi({
         getExchangesIcons: builder.query({
             query: () => createRequest(`/v1/exchanges/icons/{30px}`),
         })
-     
     })
-}) 
+})
 
-export const { useGetExchangesQuery, useGetExchangesIconsQuery } = cryptoExchanges
+export const { useGetExchangesQuery, useGetExchangesIconsQuery } = cryptoExchanges;

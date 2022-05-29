@@ -22,11 +22,11 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import PinterestIcon from '@mui/icons-material/Pinterest';
 import logo from './images/cryptocurrency.png'
 
-import Home from './components/Home/Home';
-import Cryptocurrencies from './components/Cryptocurrencies/Cryptocurrencies'
-import Exchanges from './components/Exchanges/Exchanges';
-import News from './components/News/News';
-import CryptoDetails from './components/CryptoDetails/CryptoDetails';
+import Home from './components/Home';
+import Cryptocurrencies from './components/Cryptocurrencies'
+import Exchanges from './components/Exchanges';
+import News from './components/News';
+import CryptoDetails from './components/CryptoDetails';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { Routes } from 'react-router-dom'
@@ -48,7 +48,7 @@ export default function App(props) {
     <div>
       <List>
         {['Home', 'Cryptocurrencies', 'Exchanges', 'News'].map((text, index) => (
-          <NavLink to={text} style={{textDecoration:"none", color: "white"}}>
+          <NavLink to={text} style={{ textDecoration: "none", color: "white" }}>
             <ListItem key={text} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
@@ -75,12 +75,8 @@ export default function App(props) {
 
         <AppBar
           position="fixed"
-          sx={{
-            width: { sm: `calc(100% - ${drawerWidth}px)` },
-            ml: { sm: `${drawerWidth}px` },
-
-          }}
-        >
+          sx={{ width: { sm: `calc(100% - ${drawerWidth}px)` }, ml: { sm: `${drawerWidth}px` } }}
+          >
           <Toolbar style={{ backgroundColor: '#001226' }} sx={{ display: { sm: 'none' } }}>
             <IconButton
               color="inherit"
@@ -89,18 +85,18 @@ export default function App(props) {
               onClick={handleDrawerToggle}
               sx={{ mr: 2, display: { sm: 'none' } }}
             >
-              <MenuIcon />
+               <MenuIcon />
             </IconButton>
+
             <img src={logo} alt="logo" style={{ height: '40px', marginRight: '10px' }} />
-            <Typography variant="h6" noWrap component="div">
-              Сryptoverse
-            </Typography>
+            <Typography variant="h6" noWrap component="div"> Сryptoverse </Typography>
+
           </Toolbar>
         </AppBar>
 
 
-        <Box component="nav" sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }} aria-label="mailbox folders">
-          <Drawer 
+        <Box component="nav" sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }} >
+          <Drawer
             container={container}
             variant="temporary"
             open={mobileOpen}
@@ -116,7 +112,7 @@ export default function App(props) {
             {drawer}
           </Drawer>
 
-          <Drawer 
+          <Drawer
             variant="permanent"
             sx={{
               display: { xs: 'none', sm: 'block' },
@@ -124,25 +120,25 @@ export default function App(props) {
             }}
             open
           >
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '18px 0px' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '18px 0px' }}>
+
               <img src={logo} alt="logo" style={{ width: '40px', marginRight: '10px' }} />
-              <Typography variant="h6" noWrap component="div" style={{ color: 'white' }}>
-                Сryptoverse
-              </Typography>
-            </div>
+              <Typography variant="h6" noWrap component="div" style={{ color: 'white' }}> Сryptoverse </Typography>
+
+            </Box>
             {drawer}
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'white', marginTop: '50px', gap: '10px' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'white', marginTop: '50px', gap: '10px' }}>
               <FacebookIcon />
               <InstagramIcon />
               <TwitterIcon />
               <PinterestIcon />
-            </div>
+            </Box>
           </Drawer>
 
         </Box>
 
 
-        <Box component="main" sx={{ flexGrow: 1, width: { sm: `calc(100% - ${drawerWidth}px)` }, height:"100%", backgroundColor:"#f1f2f5" }} >
+        <Box component="main" sx={{ flexGrow: 1, width: { sm: `calc(100% - ${drawerWidth}px)` }, height: "100%", backgroundColor: "#f1f2f5" }} >
           <main>
             <Routes>
               <Route path="/" element={<Home />} />

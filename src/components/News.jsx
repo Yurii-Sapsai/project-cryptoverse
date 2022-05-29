@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import moment from 'moment';
-import { useGetCryptoNewsQuery } from '../../services/cryptoNewsApi'
-import { useGetCryptosQuery } from '../../services/cryptoAPI';
+import { useGetCryptoNewsQuery } from '../services/cryptoNewsApi';
+import { useGetCryptosQuery } from '../services/cryptoAPI';
 import { Box, Grid, Select, FormControl, InputLabel, MenuItem, styled, Typography } from '@mui/material';
-import Loader from '../Loader/Loader';
+import Loader from './Loader';
 
-const demoImage = 'https://www.bing.com/th?id=OVFT.mpzuVZnv8dwIMRfQGPbOPC&pid=News'
+const demoImage = 'https://www.bing.com/th?id=OVFT.mpzuVZnv8dwIMRfQGPbOPC&pid=News';
 
 const NewsWrapper = styled(Box)(() => ({
   padding: "25px",
@@ -22,13 +22,16 @@ const NewsCard = styled(Box)(() => ({
   backgroundColor: "white",
   padding: "10px",
   borderRadius: "8px",
-  fontSize: "14px"
+  fontSize: "14px",
+  '&:hover': {
+    boxShadow: "5px 5px 15px 5px rgba(0,0,0,0.3)"
+  }
 }))
 
 function News({ simplified }) {
   const [newsCategory, setNewsCategory] = useState('Cryptocurency');
 
-  const { data: cryptoNews } = useGetCryptoNewsQuery({ newsCategory, count: simplified ? 6 : 12 })
+  const { data: cryptoNews } = useGetCryptoNewsQuery({ newsCategory, count: simplified ? 6 : 12 });
   const { data } = useGetCryptosQuery(100);
 
   if (!cryptoNews?.value) return <Loader />
@@ -54,12 +57,11 @@ function News({ simplified }) {
         {cryptoNews.value.map((news, i) => (
 
           <Grid item xs={12} sm={12} md={6} lg={4}>
-
             <a href={news.url} key={i}>
               <NewsCard >
 
                 <Box sx={{ display: "flex", alignItems: "start" }}>
-                  <Typography sx={{ pr: "10px" }} component="h4" variant={1}>{news.name}</Typography>
+                  <Typography sx={{ pr: "10px", fontWeight: "500" }} component="h4" variant={1}>{news.name}</Typography>
                   <img src={news?.image?.thumbnail?.contentUrl || demoImage} alt="news" />
                 </Box>
 
@@ -81,7 +83,6 @@ function News({ simplified }) {
 
               </NewsCard>
             </a>
-
           </Grid >
         ))}
 
@@ -91,4 +92,4 @@ function News({ simplified }) {
   )
 }
 
-export default News
+export default News;

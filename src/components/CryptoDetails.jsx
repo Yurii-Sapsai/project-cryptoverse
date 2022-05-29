@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import HTMLReactParser from 'html-react-parser';
-import { useParams } from 'react-router-dom'
-import millify from 'millify'
+import { useParams } from 'react-router-dom';
+import millify from 'millify';
 
-import { useGetCryptoDetailsQuery, useGetCryptoHistoryQuery } from '../../services/cryptoAPI'
+import { useGetCryptoDetailsQuery, useGetCryptoHistoryQuery } from '../services/cryptoAPI';
 
 import { Box, Grid } from '@mui/material';
 import { Typography } from '@mui/material';
@@ -25,20 +25,17 @@ import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 import DoDisturbOutlinedIcon from '@mui/icons-material/DoDisturbOutlined';
 import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined';
 
-import LineChart from '../LineChart/LineChart';
-import Loader from '../Loader/Loader';
+import LineChart from './LineChart';
+import Loader from './Loader';
 
 function CryptoDetails() {
 
-  const { coinId } = useParams()
+  const { coinId } = useParams();
 
   const [timeperiod, setTimePeriod] = useState('7d');
   const { data, isFetching } = useGetCryptoDetailsQuery(coinId);
   const { data: coinHistory } = useGetCryptoHistoryQuery({ coinId, timeperiod });
   const cryptoDetails = data?.data?.coin;
-
-  console.log(data)
-  console.log(cryptoDetails)
 
   const time = ['3h', '24h', '7d', '30d', '1y', '3m', '3y', '5y'];
 
@@ -60,17 +57,10 @@ function CryptoDetails() {
   if (isFetching) return <Loader />
 
   return (
-    <Box
-      maxWidth="xl"
-      sx={{
-        padding: "25px",
-        margin: "0px"
-      }}>
+    <Box sx={{ p: "25px" }}>
 
-      <Box sx={{
-        textAlign: "center"
-      }}>
-        <Typography variant="h5" component="h1">
+      <Box sx={{ textAlign: "center" }}>
+        <Typography sx={{ fontWeight: "400", color: "#1976d2" }} component="h2" variant>
           {cryptoDetails?.name} ({cryptoDetails?.symbol}) Price
         </Typography>
         <Typography sx={{ padding: "25px 0px" }}>
@@ -93,7 +83,7 @@ function CryptoDetails() {
 
       <Grid container sx={{ margin: "25px 0px" }}>
         <Grid item xs={12} sm={12} md={6}>
-          <h4>{cryptoDetails?.name} Value Statistics</h4>
+          <Typography sx={{ fontWeight: "700", mb: "15px", color: "#1976d2" }}>{cryptoDetails?.name} Value Statistics</Typography>
           <p>An overview showing the statistics of {cryptoDetails?.name}</p>
           <List>
             {stats.map(({ icon, title, value, index }) => (
@@ -107,7 +97,7 @@ function CryptoDetails() {
           </List>
         </Grid>
         <Grid item xs={12} sm={12} md={6}>
-          <h4>Other Statistics</h4>
+          <Typography sx={{ fontWeight: "700", mb: "15px", color: "#1976d2" }}>Other Statistics</Typography>
           <p>An overview showing the statistics of all cryptocurrencies</p>
           <List>
             {genericStats.map(({ icon, title, value, index }) => (
@@ -123,18 +113,18 @@ function CryptoDetails() {
       </Grid>
 
       <Grid container>
-        <Grid item xs={12} sm={12} md={6}>
-          <h4>What is {cryptoDetails?.name}</h4>
+        <Grid item xs={12} sm={12} md={6} sx={{ pr: "25px", "& p": { m: "15px 0" } }}>
+          <Typography sx={{ fontWeight: "700", color: "#1976d2" }}>What is {cryptoDetails?.name}</Typography>
           {HTMLReactParser(`${cryptoDetails?.description}`)}
         </Grid>
         <Grid item xs={12} sm={12} md={6}>
-          <h4>{cryptoDetails?.name} Links</h4>
+          <Typography sx={{ fontWeight: "700", m: "15px 0", color: "#1976d2" }}>{cryptoDetails?.name} Links</Typography>
 
           {cryptoDetails?.links.map((link, index) => (
-            <div key={index}>
-              <h4>{link?.name}</h4>
+            <Box key={index} sx={{ mt: "10px", display: "flex", justifyContent: "space-between" }}>
+              <p>{link?.name}</p>
               <a href={link?.url}>{link?.name}</a>
-            </div>
+            </Box>
           ))}
         </Grid>
       </Grid>
@@ -144,4 +134,4 @@ function CryptoDetails() {
   )
 }
 
-export default CryptoDetails
+export default CryptoDetails;
